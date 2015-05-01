@@ -1,0 +1,59 @@
+
+    <div class="jumbotron center">
+<% if user_signed_in? %>
+    <h1>Breaux Family Chores</h1>
+      </div>
+  <% User.all.each do |user| %>
+    <table width="100%">
+      <thead>
+        <tr><h1><%= user.name %></h1>
+        </tr>
+      </thead>
+      <tbody>
+          <tr><h4>Today's Chores</h4></tr>
+    <% user.chores.each do |c| %>
+      <% if c.completed == false %>
+        <% if c.date.to_date == Date.current %>                  
+                    <tr>
+                        <td><%= c.task %></td>
+                        <td><%= c.date %></td>
+                        <td><%= link_to "Complete", {:action => "completed_toggle", :id => c.id}, class: "btn btn-default btn-lg" %></td>
+                        <!-- <td><%= link_to 'Edit', edit_chore_path(c) %></td>
+                        <td><%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+                    </tr>
+        <% end %>
+      <% end %>
+    <% end %></tbody></table><table width="100%"><tbody>
+            <tr><h4>Overdue Chores</h4></tr>
+    <% user.chores.each do |p| %>
+      <% if p.completed == false %>
+        <% if p.date.to_date < Date.current %>
+                  <tr>
+                    <td><%= p.task %></td>
+                    <td><%= p.date %></td>
+                    <td><%= link_to "Complete", {:action => "completed_toggle", :id => p.id}, class: "btn btn-primary btn-lg" %></td>
+                    <!-- <td><%= link_to 'Edit', edit_chore_path(p) %></td>
+                    <td><%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+                  </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+      </tbody>
+    </table>
+
+<br><hr>
+
+<%= link_to 'New Chore', new_chore_path, class: "btn btn-primary btn-lg" %>
+
+     <% else %>
+
+     <h1>Welcome Breaux Family!</h1>
+       <p>
+         <%= link_to "Log in", new_user_session_path, class: "btn btn-primary btn-lg" %>
+         
+       </p></div>
+  <% end %>  
+
+
+

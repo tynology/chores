@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  resources :pins
+
+
+  resources :chores
 
   devise_for :users
-  root "pages#home"
-  get "about" => "pages#about"
+  root "chores#index"
+
+  get 'chores/:id/completed_toggle' => 'chores#completed_toggle', :as => 'completed_toggle_chore'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

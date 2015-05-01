@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429182601) do
+ActiveRecord::Schema.define(version: 20150501172433) do
+
+  create_table "chores", force: :cascade do |t|
+    t.string   "task"
+    t.integer  "user_id"
+    t.date     "date"
+    t.boolean  "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "pins", force: :cascade do |t|
     t.string   "description"
@@ -39,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150429182601) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
